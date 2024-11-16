@@ -1,1 +1,1 @@
-# automation-for-phs
+# automation-for-pumped-hydro
