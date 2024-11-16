@@ -2,11 +2,11 @@
 name = "psh"
 version = "0.1.0"
 description = "Evaluating PSH"
-authors = ["Chris McComb <ccm@cmu.edu>"]
+authors = { name="Chris McComb", email="ccm@cmu.edu" }
 license = { text = "MIT" }
 dependencies = [
     "pandas>=1.5.0",
-    "gradio>=42.0.0"
+    "gradio"
 ]
 
 [build-system]
