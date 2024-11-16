@@ -2,10 +2,22 @@
 This module contains functions for computing additional columns for the given row of data.
 """
 
-import pandas
+import pandas as __pandas
 
 
-def compute_lh_ratio(row: pandas.Series) -> pandas.Series:
+def dummy_demo(row: __pandas.Series) -> __pandas.Series:
+    """
+    Take the row, and just return it as is.
+    :param row: The row.
+    :type row: pandas.Series
+    :return: The row.
+    :rtype: pandas.Series
+    """
+
+    return row
+
+
+def compute_lh_ratio(row: __pandas.Series) -> __pandas.Series:
     """
     Compute additional columns for the given row of data.
     :param row: The row of data.
