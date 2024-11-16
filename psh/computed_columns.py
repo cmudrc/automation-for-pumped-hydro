@@ -5,18 +5,6 @@ This module contains functions for computing additional columns for the given ro
 import pandas
 
 
-def dummy_demo(row: pandas.Series) -> pandas.Series:
-    """
-    Take the row, and just return it as is.
-    :param row: The row.
-    :type row: pandas.Series
-    :return: The row.
-    :rtype: pandas.Series
-    """
-
-    return row
-
-
 def compute_lh_ratio(row: pandas.Series) -> pandas.Series:
     """
     Compute additional columns for the given row of data.
