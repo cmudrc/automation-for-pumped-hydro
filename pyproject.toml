@@ -3,7 +3,7 @@ name = "psh"
 version = "0.1.0"
 description = "Evaluating PSH"
 authors = ["Chris McComb <ccm@cmu.edu>"]
-license = "MIT"
+license = { text = "MIT" }
 dependencies = [
     "pandas>=1.5.0",
     "gradio>=42.0.0"
