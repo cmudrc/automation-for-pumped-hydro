@@ -1,10 +1,7 @@
 import gradio
 
-from .dataset import load_data
-from .ranking import sort_data, sorting_fields
-
-# Load the dataset
-nrel_psh = load_data()
+from .dataset import DATA
+from .ranking import sort_data, fields_to_exclude_from_sorting
 
 
 # Define Gradio interface
@@ -18,12 +15,17 @@ def get_demo() -> gradio.Interface:
     min_cutoffs = []  # List to store minimum cutoff sliders
     max_cutoffs = []  # List to store maximum cutoff sliders
 
+    # Determine sorting fields by excluding fields_to_exclude_from_sorting
+    sorting_fields = [
+        field for field in DATA.columns if field not in fields_to_exclude_from_sorting
+    ]
+
     with gradio.Blocks() as demo:
         for field in sorting_fields:
             with gradio.Row():
                 # Get min/max values for the field
-                min_val = nrel_psh[field].min()
-                max_val = nrel_psh[field].max()
+                min_val = DATA[field].min()
+                max_val = DATA[field].max()
 
                 # Create sliders for min and max cutoffs
                 min_cutoff = gradio.Slider(
