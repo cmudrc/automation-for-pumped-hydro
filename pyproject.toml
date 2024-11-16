@@ -5,10 +5,10 @@ description = "Evaluating PSH"
 authors = [{ name="Chris McComb", email="ccm@cmu.edu" }]
 license = { text = "MIT" }
 dependencies = [
-    "pandas>=1.5.0",
+    "pandas",
     "gradio"
 ]
 
 [build-system]
-requires = ["setuptools>=42", "wheel"]
+requires = ["setuptools", "wheel"]
 build-backend = "setuptools.build_meta"
