@@ -7,7 +7,7 @@ import pandas as pd
 import psh.computed_columns
 
 
-def load_data() -> pd.DataFrame:
+def _load_data() -> pd.DataFrame:
     """
     Load the dataset from the NREL PSH database.
     :return: The dataset as a pandas DataFrame.
@@ -30,3 +30,6 @@ def load_data() -> pd.DataFrame:
         nrel_psh = nrel_psh.apply(getattr(psh.computed_columns, function), axis=1)
 
     return nrel_psh
+
+
+DATA = _load_data()
