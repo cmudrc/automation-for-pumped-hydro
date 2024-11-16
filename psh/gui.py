@@ -1,3 +1,7 @@
+"""
+This module contains the Gradio interface for the PSH dataset.
+"""
+
 import gradio
 
 from .dataset import DATA

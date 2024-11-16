@@ -1,3 +1,7 @@
+"""
+This module provides a function to sort the dataset based on weighted sum of fields.
+"""
+
 from .dataset import DATA
 
 import pandas
