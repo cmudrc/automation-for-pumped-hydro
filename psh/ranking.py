@@ -21,14 +21,12 @@ fields_to_exclude_from_sorting = [
 
 
 def sort_data(*weights_and_cutoffs: float) -> pandas.DataFrame:
-    """Loads the dataset, applies cutoffs, calculates weighted sum, and sorts the data.
-
-    Args:
-        *weights_and_cutoffs: A sequence containing weights for each field
-            followed by minimum and maximum cutoff values for each field.
-
-    Returns:
-        pandas.DataFrame: The sorted DataFrame.
+    """
+    Loads the dataset, applies cutoffs, calculates weighted sum, and sorts the data.
+    :param weights_and_cutoffs:
+    :type weights_and_cutoffs: float
+    :return: The sorted DataFrame.
+    :rtype: pandas.DataFrame
     """
 
     # Copy the data for manipulation
