@@ -45,6 +45,7 @@ def compute_water_availability(row: __pandas.Series) -> __pandas.Series:
     # Pull lat and long from row
     # Look up location
     # Measure distance to creek/river/lake?
+    # https://hub.arcgis.com/datasets/esri::usa-detailed-water-bodies/about
     row["Water Availability"] = False
     return row
 
