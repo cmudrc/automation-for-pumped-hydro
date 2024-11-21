@@ -1,23 +1,24 @@
 """
-This module contains functions for computing additional columns for the given row of data.
+This module contains functions for computing additional columns for the given row of data. These functions are
+automatically detected and used to transform data rows.
+
+To write a valid function for this application, follow these guidelines:
+1. The function must take a single argument of type `pandas.Series`.
+2. The function must return a `pandas.Series`.
+3. The function should add or modify columns in the input `pandas.Series`.
+
+Example:
+```python
+def compute_example(row: pandas.Series) -> pandas.Series:
+    row["Example Column"] = row["Some Column"] * 2
+    return row
+```
 """
 
-import pandas as __pandas
+import pandas
 
 
-def dummy_demo(row: __pandas.Series) -> __pandas.Series:
-    """
-    Take the row, and just return it as is.
-    :param row: The row.
-    :type row: pandas.Series
-    :return: The row.
-    :rtype: pandas.Series
-    """
-
-    return row
-
-
-def compute_lh_ratio(row: __pandas.Series) -> __pandas.Series:
+def compute_lh_ratio(row: pandas.Series) -> pandas.Series:
     """
     Compute additional columns for the given row of data.
     :param row: The row of data.
@@ -34,14 +35,15 @@ def compute_lh_ratio(row: __pandas.Series) -> __pandas.Series:
     return row
 
 
-def compute_remoteness(row: __pandas.Series) -> __pandas.Series:
+def compute_remoteness(row: pandas.Series) -> pandas.Series:
     # Pull lat and long from row
     # Look up location
     # Measure distance to civilization?
     row["Remote"] = False
     return row
 
-def compute_water_availability(row: __pandas.Series) -> __pandas.Series:
+
+def compute_water_availability(row: pandas.Series) -> pandas.Series:
     # Pull lat and long from row
     # Look up location
     # Measure distance to creek/river/lake?
@@ -49,5 +51,16 @@ def compute_water_availability(row: __pandas.Series) -> __pandas.Series:
     row["Water Availability"] = False
     return row
 
-# Define __all__ dynamically
-__all__ = [name for name in locals() if not name.startswith("__")]
+
+# Only export the functions that transform rows
+LOCALS = locals()
+__all__ = [
+    name
+    for name in LOCALS  # iterate over everything in the current module
+    if callable(LOCALS[name])  # has to be a function
+    and len(LOCALS[name].__annotations__.values())
+    == 2  # has to have one input and one output (1+1=2)
+    and all(
+        val == pandas.Series for val in LOCALS[name].__annotations__.values()
+    )  # has to have all typehints of type Series
+]
