@@ -37,9 +37,15 @@ def compute_lh_ratio(row: pandas.Series) -> pandas.Series:
 
 def compute_remoteness(row: pandas.Series) -> pandas.Series:
     # Pull lat and long from row
-    # Look up location
-    # Measure distance to civilization?
-    row["Remote"] = False
+    reservoir_lat = row["Latitude"]
+    reservoir_lon = row["Longitude"]
+    
+    # Fetch nearby grocery stores (the treshold is defined in the function)
+    grocery_stores = fetch_grocery_stores(GOOGLE_MAPS_API_KEY, reservoir_lat, reservoir_lon)
+
+    # If no grocery stores are found, mark as remote
+    row["Remote"] = grocery_stores.empty
+    
     return row
 
 
