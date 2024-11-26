@@ -27,10 +27,10 @@ def compute_lh_ratio(row: pandas.Series) -> pandas.Series:
     :rtype: pandas.Series
     """
     # Compute the L:H Ratio
-    row["L:H Ratio (Computed)"] = (
-        row["Horizontal Distance Between Reservoirs (Meters)"]
-        / row["System Average Hydraulic Head (Meters)"]
-    )
+   # row["L:H Ratio (Computed)"] = (
+   #     row["Horizontal Distance Between Reservoirs (Meters)"]
+    #    / row["System Average Hydraulic Head (Meters)"]
+   # )
 
     return row
 
