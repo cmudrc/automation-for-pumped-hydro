@@ -44,7 +44,7 @@ def compute_remoteness(row: pandas.Series) -> pandas.Series:
     grocery_stores = fetch_grocery_stores(AIzaSyD8G_C8RknpUBgPTiNerZkOQ5W_1ge5ASk, reservoir_lat, reservoir_lon)
 
     # If no grocery stores are found, mark as remote
-    row["Remote"] = grocery_stores.empty
+    row["Remote (Computed)"] = grocery_stores.empty
     
     return row
 
