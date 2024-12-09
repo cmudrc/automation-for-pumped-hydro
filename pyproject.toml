@@ -6,7 +6,8 @@ authors = [{ name="Chris McComb", email="ccm@cmu.edu" }]
 license = { text = "MIT" }
 dependencies = [
     "pandas",
-    "gradio"
+    "gradio",
+    "requests"
 ]
 
 [build-system]
