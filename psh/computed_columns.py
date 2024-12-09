@@ -37,6 +37,14 @@ def compute_lh_ratio(row: pandas.Series) -> pandas.Series:
 
 
 def compute_remoteness(row: pandas.Series) -> pandas.Series:
+    """
+    Compute remoteness based on the distance to the nearest grocery store.
+    :param row: The row of data.
+    :type row: pandas.Series
+    :return: The row with additional columns.
+    :rtype: pandas.Series
+    """
+
     # Pull lat and long from row
     reservoir_lat = row["Latitude"]
     reservoir_lon = row["Longitude"]
