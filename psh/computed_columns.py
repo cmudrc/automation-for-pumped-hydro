@@ -16,6 +16,7 @@ def compute_example(row: pandas.Series) -> pandas.Series:
 """
 
 import pandas
+
 from .data_fetcher import fetch_grocery_stores
 
 
@@ -48,13 +49,13 @@ def compute_remoteness(row: pandas.Series) -> pandas.Series:
     # Pull lat and long from row
     reservoir_lat = row["Latitude"]
     reservoir_lon = row["Longitude"]
-    
+
     # Fetch nearby grocery stores (the threshold is defined in the function)
     grocery_stores = fetch_grocery_stores(reservoir_lat, reservoir_lon)
 
     # If no grocery stores are found, mark as remote
     row["Remote (Computed)"] = grocery_stores.empty
-    
+
     return row
 
 
