@@ -2,9 +2,9 @@
 This module provides a function to sort the dataset based on weighted sum of fields.
 """
 
-from .dataset import DATA
-
 import pandas
+
+from .dataset import DATA
 
 fields_to_exclude_from_sorting = [
     "Scenario System ID",

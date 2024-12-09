@@ -2,7 +2,6 @@ import os
 
 import pandas
 import requests
-import pandas as pd
 
 
 def fetch_grocery_stores(
@@ -10,11 +9,14 @@ def fetch_grocery_stores(
 ):
     """
     Fetch grocery store locations near a given reservoir.
-    :param api_key: Google Maps API key.
     :param reservoir_lat: Latitude of the reservoir.
+    :type reservoir_lat: float
     :param reservoir_lon: Longitude of the reservoir.
+    :type reservoir_lon: float
     :param radius: Search radius in meters (default: 50 miles).
+    :type radius: float
     :return: DataFrame with grocery store names and their lat/lon.
+    :rtype: pandas.DataFrame
     """
     url = "https://maps.googleapis.com/maps/api/place/nearbysearch/json"
     params = {
