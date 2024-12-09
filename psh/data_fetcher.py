@@ -4,7 +4,10 @@ import pandas
 import requests
 import pandas as pd
 
-def fetch_grocery_stores(api_key: str, reservoir_lat: float, reservoir_lon: float, radius: float = 80000.0): #50mile
+
+def fetch_grocery_stores(
+    reservoir_lat: float, reservoir_lon: float, radius: float = 80000.0
+):
     """
     Fetch grocery store locations near a given reservoir.
     :param api_key: Google Maps API key.
