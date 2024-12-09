@@ -1,3 +1,4 @@
+import os
 import requests
 import pandas as pd
 
@@ -15,7 +16,7 @@ def fetch_grocery_stores(api_key: str, reservoir_lat: float, reservoir_lon: floa
         "location": f"{reservoir_lat},{reservoir_lon}",
         "radius": radius,
         "type": "grocery_or_supermarket",
-        "key": api_key,
+        "key": os.getenv("GOOGLE_MAPS_API_KEY"),
     }
 
     response = requests.get(url, params=params)
