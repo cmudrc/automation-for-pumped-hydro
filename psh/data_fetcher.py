@@ -1,4 +1,6 @@
 import os
+
+import pandas
 import requests
 import pandas as pd
 
@@ -33,4 +35,4 @@ def fetch_grocery_stores(api_key: str, reservoir_lat: float, reservoir_lon: floa
         for store in data["results"]
     ]
 
-    return pd.DataFrame(stores)
+    return pandas.DataFrame(stores)
