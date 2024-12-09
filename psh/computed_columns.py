@@ -41,7 +41,7 @@ def compute_remoteness(row: pandas.Series) -> pandas.Series:
     reservoir_lat = row["Latitude"]
     reservoir_lon = row["Longitude"]
     
-    # Fetch nearby grocery stores (the treshold is defined in the function)
+    # Fetch nearby grocery stores (the threshold is defined in the function)
     grocery_stores = fetch_grocery_stores("AIzaSyD8G_C8RknpUBgPTiNerZkOQ5W_1ge5ASk", reservoir_lat, reservoir_lon)
 
     # If no grocery stores are found, mark as remote
