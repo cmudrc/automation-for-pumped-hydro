@@ -37,35 +37,37 @@ def compute_lh_ratio(row: pandas.Series) -> pandas.Series:
     return row
 
 
-def compute_remoteness(row: pandas.Series) -> pandas.Series:
-    """
-    Compute remoteness based on the distance to the nearest grocery store.
-    :param row: The row of data.
-    :type row: pandas.Series
-    :return: The row with additional columns.
-    :rtype: pandas.Series
-    """
-
-    # Pull lat and long from row
-    reservoir_lat = row["Latitude"]
-    reservoir_lon = row["Longitude"]
-
-    # Fetch nearby grocery stores (the threshold is defined in the function)
-    grocery_stores = fetch_grocery_stores(reservoir_lat, reservoir_lon)
-
-    # If no grocery stores are found, mark as remote
-    row["Remote (Computed)"] = grocery_stores.empty
-
-    return row
-
-
-def compute_water_availability(row: pandas.Series) -> pandas.Series:
-    # Pull lat and long from row
-    # Look up location
-    # Measure distance to creek/river/lake?
-    # https://hub.arcgis.com/datasets/esri::usa-detailed-water-bodies/about
-    row["Water Availability"] = False
-    return row
+# def compute_remoteness(row: pandas.Series) -> pandas.Series:
+#     """
+#     Compute remoteness based on the distance to the nearest grocery store.
+#     :param row: The row of data.
+#     :type row: pandas.Series
+#     :return: The row with additional columns.
+#     :rtype: pandas.Series
+#     """
+#
+#     # Pull lat and long from row
+#     reservoir_lat = row["Latitude"]
+#     reservoir_lon = row["Longitude"]
+#
+#     # Fetch nearby grocery stores (the threshold is defined in the function)
+#     grocery_stores = fetch_grocery_stores(reservoir_lat, reservoir_lon)
+#
+#     # If no grocery stores are found, mark as remote
+#     row["Remote (Computed)"] = grocery_stores.empty
+#
+#     print(row["Remote (Computed)"])
+#
+#     return row
+#
+#
+# def compute_water_availability(row: pandas.Series) -> pandas.Series:
+#     # Pull lat and long from row
+#     # Look up location
+#     # Measure distance to creek/river/lake?
+#     # https://hub.arcgis.com/datasets/esri::usa-detailed-water-bodies/about
+#     row["Water Availability"] = False
+#     return row
 
 
 # Only export the functions that transform rows
