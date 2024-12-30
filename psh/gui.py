@@ -2,19 +2,20 @@
 This module contains the enhanced Gradio interface with Leaflet map visualization.
 """
 
+import json
+
 import gradio
 import pandas as pd
-import json
-from typing import List, Tuple
 
 from .dataset import DATA
 from .ranking import sort_data, fields_to_exclude_from_sorting
 
+
 def create_map_html(filtered_data: pd.DataFrame) -> str:
     """Create the map HTML with Leaflet."""
     # Convert valid points to GeoJSON for efficient processing
-    valid_data = filtered_data.dropna(subset=['Latitude', 'Longitude'])
-    
+    valid_data = filtered_data.dropna(subset=["Latitude", "Longitude"])
+
     # Create feature collection
     features = []
     for _, row in valid_data.iterrows():
@@ -22,20 +23,20 @@ def create_map_html(filtered_data: pd.DataFrame) -> str:
             "type": "Feature",
             "geometry": {
                 "type": "Point",
-                "coordinates": [float(row['Longitude']), float(row['Latitude'])]
+                "coordinates": [float(row["Longitude"]), float(row["Latitude"])],
             },
             "properties": {
-                "scenario_id": str(row['Scenario System ID']),
-                "latitude": str(row['Latitude']),
-                "longitude": str(row['Longitude'])
-            }
+                "scenario_id": str(row["Scenario System ID"]),
+                "latitude": str(row["Latitude"]),
+                "longitude": str(row["Longitude"]),
+            },
         }
         features.append(feature)
-    
+
     geojson_data = json.dumps({"type": "FeatureCollection", "features": features})
-    
+
     # Create complete HTML document
-    html_content = f'''
+    html_content = f"""
     <!DOCTYPE html>
     <html>
     <head>
@@ -114,9 +115,9 @@ def create_map_html(filtered_data: pd.DataFrame) -> str:
         </script>
     </body>
     </html>
-    '''
-    
-    return f'''
+    """
+
+    return f"""
     <div style="height:600px;width:100%;border:none;">
         <iframe 
             srcdoc="{html_content.replace('"', '&quot;')}"
@@ -124,7 +125,8 @@ def create_map_html(filtered_data: pd.DataFrame) -> str:
             sandbox="allow-scripts allow-same-origin">
         </iframe>
     </div>
-    '''
+    """
+
 
 def get_demo() -> gradio.Blocks:
     """
@@ -134,13 +136,12 @@ def get_demo() -> gradio.Blocks:
     sorting_fields = [
         field for field in DATA.columns if field not in fields_to_exclude_from_sorting
     ]
-    
+
     # Pre-calculate min/max values
     field_ranges = {
-        field: (DATA[field].min(), DATA[field].max())
-        for field in sorting_fields
+        field: (DATA[field].min(), DATA[field].max()) for field in sorting_fields
     }
-    
+
     weights = []
     min_cutoffs = []
     max_cutoffs = []
@@ -188,19 +189,13 @@ def get_demo() -> gradio.Blocks:
         # Update both visualizations on any input change
         update_inputs = weights + min_cutoffs + max_cutoffs
         update_outputs = [map_html, data_table]
-        
+
         for elem in update_inputs:
             elem.change(
-                update_visualization,
-                inputs=update_inputs,
-                outputs=update_outputs
+                update_visualization, inputs=update_inputs, outputs=update_outputs
             )
 
         # Initial load
-        demo.load(
-            update_visualization,
-            inputs=update_inputs,
-            outputs=update_outputs
-        )
+        demo.load(update_visualization, inputs=update_inputs, outputs=update_outputs)
 
     return demo

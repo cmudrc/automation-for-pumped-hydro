@@ -17,8 +17,6 @@ def compute_example(row: pandas.Series) -> pandas.Series:
 
 import pandas
 
-from .data_fetcher import fetch_grocery_stores
-
 
 def compute_lh_ratio(row: pandas.Series) -> pandas.Series:
     """
