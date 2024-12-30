@@ -10,6 +10,8 @@ import pandas as pd
 from .dataset import DATA
 from .ranking import sort_data, fields_to_exclude_from_sorting
 
+LEAVE_TOP_N_OPEN = 3
+
 
 def create_map_html(filtered_data: pd.DataFrame) -> str:
     """Create the map HTML with Leaflet."""
@@ -149,33 +151,35 @@ def get_demo() -> gradio.Blocks:
     with gradio.Blocks() as demo:
         with gradio.Row():
             # Left column for controls
-            with gradio.Column(scale=1.5):
-                for field in sorting_fields:
-                    with gradio.Row():
-                        min_val, max_val = field_ranges[field]
+            with gradio.Column():
+                for i, field in enumerate(sorting_fields):
 
-                        min_cutoff = gradio.Slider(
-                            minimum=min_val,
-                            maximum=max_val,
-                            label=f"{field} Min Cutoff",
-                            step=1,
-                        )
-                        min_cutoffs.append(min_cutoff)
+                    with gradio.Accordion(label=field, open=(i < LEAVE_TOP_N_OPEN)):
+                        with gradio.Row():
+                            min_val, max_val = field_ranges[field]
 
-                        max_cutoff = gradio.Slider(
-                            minimum=min_val,
-                            maximum=max_val,
-                            label=f"{field} Max Cutoff",
-                            step=1,
-                            value=max_val,
-                        )
-                        max_cutoffs.append(max_cutoff)
+                            min_cutoff = gradio.Slider(
+                                minimum=min_val,
+                                maximum=max_val,
+                                label=f"Min Cutoff",
+                                step=1,
+                            )
+                            min_cutoffs.append(min_cutoff)
 
-                        weight = gradio.Number(label=f"{field} Weight", value=1)
-                        weights.append(weight)
+                            max_cutoff = gradio.Slider(
+                                minimum=min_val,
+                                maximum=max_val,
+                                label=f"Max Cutoff",
+                                step=1,
+                                value=max_val,
+                            )
+                            max_cutoffs.append(max_cutoff)
+
+                            weight = gradio.Number(label="Weight", value=1)
+                            weights.append(weight)
 
             # Right column for visualization
-            with gradio.Column(scale=1.5):
+            with gradio.Column():
                 # Reduced height of map container
                 map_html = gradio.HTML(label="Location Map")
                 # Slightly reduced height for table
